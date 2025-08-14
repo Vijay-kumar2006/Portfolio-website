@@ -1,0 +1,36 @@
+VIJAY KUMAR R
+Computer Science Student
+
+Education:
+Kalvium UG Program (BCA) at RV University
+2024 - 2028
+Computer Science Specialization
+
+Skills:
+Languages: C++, Python, JavaScript, TypeScript, Java
+Frontend: React, HTML5, CSS3, Tailwind CSS, Bootstrap  
+Backend: Node.js, Express.js, Flask, Django
+Databases: MongoDB, MySQL, PostgreSQL
+Tools: Git, GitHub, VS Code, Linux, Figma
+
+Projects:
+1. EcoTrack - Environmental impact tracking app (React, Node.js, MongoDB, Express.js)
+2. Lexolution - AI-powered language learning platform (Python, Flask, JavaScript, MySQL)
+3. JobGenie - Smart job matching platform (React, Node.js, MongoDB, Python)
+
+Achievements:
+- Hackathon Finalist
+- CodeVerse GDG RVU Challenge Participant
+- Coding Events Leadership
+
+Personal Interests:
+- Bike Riding
+- Photography
+- Ethical Hacking
+- Linux Exploration
+
+Contact:
+Email: vijaykumar.r@rvuniversity.edu.in
+Location: Bangalore, India
+GitHub: github.com/vijaykumarr
+LinkedIn: linkedin.com/in/vijaykumarr
