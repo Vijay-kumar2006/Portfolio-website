@@ -32,10 +32,10 @@ const Portfolio = () => {
     }, 100);
 
     return () => clearInterval(typingInterval);
-  }, [typingIndex, textIndex]);
+  }, [typingIndex, textIndex, typingTexts]);
 
   // Smooth scroll function
-  const scrollToSection = (sectionId: string) => {
+  const scrollToSection = (sectionId) => {
     const element = document.getElementById(sectionId);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
@@ -100,6 +100,30 @@ const Portfolio = () => {
     { icon: '🐧', title: 'Linux Exploration', description: 'Diving deep into Linux systems, command line tools, and open-source technologies' }
   ];
 
+  const handleResumeDownload = () => {
+    const link = document.createElement('a');
+    link.href = '/assets/resume.txt';
+    link.download = 'Vijay_Kumar_R_Resume.txt';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
+  const handleContactSubmit = (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const data = {
+      name: formData.get('name'),
+      email: formData.get('email'),
+      subject: formData.get('subject'),
+      message: formData.get('message')
+    };
+    console.log('Contact form submitted:', data);
+    // Add actual form submission logic here
+    alert('Thank you for your message! I will get back to you soon.');
+    e.target.reset();
+  };
+
   return (
     <div className="min-h-screen bg-slate-900 text-white">
       {/* Navigation */}
@@ -143,12 +167,7 @@ const Portfolio = () => {
             <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
               <Button 
                 className="bg-gradient-to-r from-blue-500 to-green-500 hover:from-blue-600 hover:to-green-600"
-                onClick={() => {
-                  const link = document.createElement('a');
-                  link.href = '../assets/resume.txt';
-                  link.download = 'Vijay_Kumar_R_Resume.txt';
-                  link.click();
-                }}
+                onClick={handleResumeDownload}
               >
                 📄 Download Resume
               </Button>
@@ -424,32 +443,40 @@ const Portfolio = () => {
             </div>
             <Card className="bg-slate-800 border-slate-700">
               <CardContent className="p-6">
-                <form className="space-y-4">
+                <form className="space-y-4" onSubmit={handleContactSubmit}>
                   <div>
                     <input 
                       type="text" 
+                      name="name"
                       placeholder="Your Name"
+                      required
                       className="w-full p-3 bg-slate-700 border border-slate-600 rounded-lg text-white placeholder-slate-400 focus:border-blue-400 focus:outline-none"
                     />
                   </div>
                   <div>
                     <input 
                       type="email" 
+                      name="email"
                       placeholder="Your Email"
+                      required
                       className="w-full p-3 bg-slate-700 border border-slate-600 rounded-lg text-white placeholder-slate-400 focus:border-blue-400 focus:outline-none"
                     />
                   </div>
                   <div>
                     <input 
                       type="text" 
+                      name="subject"
                       placeholder="Subject"
+                      required
                       className="w-full p-3 bg-slate-700 border border-slate-600 rounded-lg text-white placeholder-slate-400 focus:border-blue-400 focus:outline-none"
                     />
                   </div>
                   <div>
                     <textarea 
+                      name="message"
                       placeholder="Your Message"
                       rows={5}
+                      required
                       className="w-full p-3 bg-slate-700 border border-slate-600 rounded-lg text-white placeholder-slate-400 focus:border-blue-400 focus:outline-none resize-none"
                     />
                   </div>

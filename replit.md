@@ -1,10 +1,12 @@
 # Overview
 
-This is a full-stack web application built with React, TypeScript, and Express.js that includes a personal portfolio website. The project features a modern tech stack with shadcn/ui components, Drizzle ORM for database operations, and TanStack Query for state management. The application appears to be transitioning from a static HTML portfolio to a dynamic React-based application.
+This is a full-stack web application built with React, JSX, and Express.js featuring a personal portfolio website for Vijay Kumar R, a Computer Science student at RV University (2024-28). The project uses a modern tech stack with shadcn/ui components, Drizzle ORM for database operations, and TanStack Query for state management. The portfolio showcases a dark theme with green/blue gradient highlights and includes sections for Hero, About, Skills, Projects, Achievements, Education, Personal Interests, and Contact.
 
 # User Preferences
 
 Preferred communication style: Simple, everyday language.
+Portfolio format: JSX format with npm (not TypeScript)
+Design preference: Modern dark theme with green/blue gradient highlights
 
 # System Architecture
 
