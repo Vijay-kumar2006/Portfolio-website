@@ -1,21 +1,66 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
-import nodemailer from 'nodemailer';
 
-// Create Gmail transporter
-const createGmailTransporter = () => {
-  if (!process.env.GMAIL_USER || !process.env.GMAIL_APP_PASSWORD) {
-    return null;
-  }
-  
-  return nodemailer.createTransport({
-    service: 'gmail',
-    auth: {
-      user: process.env.GMAIL_USER,
-      pass: process.env.GMAIL_APP_PASSWORD
+// Function to send email via webhook service
+const sendEmailWebhook = async (name: string, email: string, subject: string, message: string) => {
+  try {
+    // Using a simple webhook service that forwards emails
+    const webhookData = {
+      to: 'vijaykumar.vk3105@gmail.com',
+      from: email,
+      subject: `Portfolio Contact: ${subject}`,
+      text: `New message from ${name} (${email}):\n\n${message}`,
+      html: `
+        <h2>New Contact Form Submission</h2>
+        <p><strong>Name:</strong> ${name}</p>
+        <p><strong>Email:</strong> ${email}</p>
+        <p><strong>Subject:</strong> ${subject}</p>
+        <br>
+        <p><strong>Message:</strong></p>
+        <div style="background: #f5f5f5; padding: 15px; border-radius: 5px;">
+          ${message.replace(/\n/g, '<br>')}
+        </div>
+      `
+    };
+
+    // Use Web3Forms - completely free email forwarding service
+    try {
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          access_key: process.env.WEB3FORMS_ACCESS_KEY,
+          name,
+          email,
+          subject: `Portfolio Contact: ${subject}`,
+          message: `New message from ${name} (${email}):\n\nSubject: ${subject}\n\nMessage:\n${message}`,
+          from_name: `Portfolio Contact - ${name}`,
+          to: 'vijaykumar.vk3105@gmail.com',
+          _replyto: email,
+          _subject: `Portfolio Contact: ${subject}`,
+          _cc: email // Send a copy to the sender
+        })
+      });
+
+      if (response.ok) {
+        console.log('Email sent successfully via Web3Forms');
+        return true;
+      } else {
+        const error = await response.text();
+        console.log('Web3Forms error:', error);
+      }
+    } catch (error) {
+      console.log('Web3Forms failed:', error);
     }
-  });
+
+    return false;
+  } catch (error) {
+    console.error('All email services failed:', error);
+    return false;
+  }
 };
 
 export async function registerRoutes(app: Express): Promise<Server> {
@@ -31,62 +76,23 @@ export async function registerRoutes(app: Express): Promise<Server> {
       // Log the submission for debugging
       console.log('Contact form submission:', { name, email, subject, message });
 
-      // For now, we'll log the message and show success to the user
-      // The email functionality requires proper Gmail App Password setup
+      // Log the message for debugging
       console.log('=== CONTACT FORM MESSAGE ===');
       console.log(`From: ${name} (${email})`);
       console.log(`Subject: ${subject}`);
       console.log(`Message: ${message}`);
       console.log('============================');
 
-      // Try to send email if credentials are available
-      if (process.env.GMAIL_USER && process.env.GMAIL_APP_PASSWORD) {
-        try {
-          const transporter = createGmailTransporter();
-          if (transporter) {
-            const mailOptions = {
-              from: process.env.GMAIL_USER,
-              to: 'vijaykumar.vk3105@gmail.com',
-              subject: `Portfolio Contact: ${subject}`,
-              text: `
-New contact form submission from your portfolio:
-
-Name: ${name}
-Email: ${email}
-Subject: ${subject}
-
-Message:
-${message}
-
-Reply to: ${email}
-              `,
-              html: `
-<h2>New Contact Form Submission</h2>
-<p><strong>Name:</strong> ${name}</p>
-<p><strong>Email:</strong> <a href="mailto:${email}">${email}</a></p>
-<p><strong>Subject:</strong> ${subject}</p>
-<br>
-<p><strong>Message:</strong></p>
-<div style="background: #f5f5f5; padding: 15px; border-left: 3px solid #007bff; margin: 10px 0;">
-${message.replace(/\n/g, '<br>')}
-</div>
-<br>
-<p><em>You can reply directly to this email to respond to ${name}.</em></p>
-              `,
-              replyTo: email
-            };
-
-            await transporter.sendMail(mailOptions);
-            console.log('Email sent successfully to vijaykumar.vk3105@gmail.com');
-            return res.status(200).json({ message: 'Message sent successfully! You will receive an email notification.' });
-          }
-        } catch (error) {
-          console.error('Email sending failed, but message was logged:', error.message);
-        }
+      // Try to send email using webhook service
+      const emailSent = await sendEmailWebhook(name, email, subject, message);
+      
+      if (emailSent) {
+        res.status(200).json({ message: 'Message sent successfully! You will receive an email notification.' });
+      } else {
+        // Fallback: still show success to user but note email issue
+        console.log('Email webhook failed, but message was logged');
+        res.status(200).json({ message: 'Message received successfully! I will get back to you soon.' });
       }
-
-      // Always show success to user even if email fails
-      res.status(200).json({ message: 'Message received successfully! I will get back to you soon.' });
     } catch (error) {
       console.error('Error sending email:', error);
       res.status(500).json({ error: 'Failed to send message. Please try again.' });
