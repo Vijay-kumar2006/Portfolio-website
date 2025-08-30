@@ -102,14 +102,14 @@ const Portfolio = () => {
 
   const handleResumeDownload = () => {
     const link = document.createElement('a');
-    link.href = '/assets/resume.txt';
-    link.download = 'Vijay_Kumar_R_Resume.txt';
+    link.href = '/assets/Vijay%20Kumar%20R_1756547064114.pdf';
+    link.download = 'Vijay_Kumar_R_Resume.pdf';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
   };
 
-  const handleContactSubmit = (e) => {
+  const handleContactSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
     const data = {
@@ -118,10 +118,26 @@ const Portfolio = () => {
       subject: formData.get('subject'),
       message: formData.get('message')
     };
-    console.log('Contact form submitted:', data);
-    // Add actual form submission logic here
-    alert('Thank you for your message! I will get back to you soon.');
-    e.target.reset();
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (response.ok) {
+        alert('Thank you for your message! I will get back to you soon.');
+        e.target.reset();
+      } else {
+        alert('Sorry, there was an error sending your message. Please try again.');
+      }
+    } catch (error) {
+      console.error('Error sending message:', error);
+      alert('Sorry, there was an error sending your message. Please try again.');
+    }
   };
 
   return (
@@ -411,7 +427,7 @@ const Portfolio = () => {
               <div className="space-y-4 mb-8">
                 <div className="flex items-center gap-4">
                   <div className="text-blue-400">✉️</div>
-                  <span className="text-slate-300">vijaykumar.r@rvuniversity.edu.in</span>
+                  <span className="text-slate-300">vijaykumar.vk3105@gmail.com</span>
                 </div>
                 <div className="flex items-center gap-4">
                   <div className="text-blue-400">📍</div>
