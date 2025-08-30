@@ -26,31 +26,40 @@ const sendEmailWebhook = async (name: string, email: string, subject: string, me
 
     // Use Web3Forms - completely free email forwarding service
     try {
+      const requestBody = {
+        access_key: process.env.WEB3FORMS_ACCESS_KEY,
+        name,
+        email,
+        subject: `Portfolio Contact: ${subject}`,
+        message: `New message from ${name} (${email}):\n\nSubject: ${subject}\n\nMessage:\n${message}`,
+        from_name: `Portfolio Contact - ${name}`,
+        _replyto: email,
+        _subject: `Portfolio Contact: ${subject}`
+      };
+
+      console.log('Sending to Web3Forms with access key length:', process.env.WEB3FORMS_ACCESS_KEY?.length || 0);
+
       const response = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          access_key: process.env.WEB3FORMS_ACCESS_KEY,
-          name,
-          email,
-          subject: `Portfolio Contact: ${subject}`,
-          message: `New message from ${name} (${email}):\n\nSubject: ${subject}\n\nMessage:\n${message}`,
-          from_name: `Portfolio Contact - ${name}`,
-          to: 'vijaykumar.vk3105@gmail.com',
-          _replyto: email,
-          _subject: `Portfolio Contact: ${subject}`,
-          _cc: email // Send a copy to the sender
-        })
+        body: JSON.stringify(requestBody)
       });
 
+      const responseText = await response.text();
+      console.log('Web3Forms response:', responseText);
+
       if (response.ok) {
-        console.log('Email sent successfully via Web3Forms');
-        return true;
+        const result = JSON.parse(responseText);
+        if (result.success) {
+          console.log('Email sent successfully via Web3Forms');
+          return true;
+        } else {
+          console.log('Web3Forms error:', result.message);
+        }
       } else {
-        const error = await response.text();
-        console.log('Web3Forms error:', error);
+        console.log('Web3Forms HTTP error:', response.status, responseText);
       }
     } catch (error) {
       console.log('Web3Forms failed:', error);

@@ -129,14 +129,14 @@ const Portfolio = () => {
       });
 
       if (response.ok) {
-        alert('Thank you for your message! I will get back to you soon.');
+        alert('Thank you for your message! I will get back to you soon.\n\nNote: If this is urgent, you can also email me directly at vijaykumar.vk3105@gmail.com');
         e.target.reset();
       } else {
-        alert('Sorry, there was an error sending your message. Please try again.');
+        alert('Sorry, there was an error sending your message. Please email me directly at vijaykumar.vk3105@gmail.com');
       }
     } catch (error) {
       console.error('Error sending message:', error);
-      alert('Sorry, there was an error sending your message. Please try again.');
+      alert('Please email me directly at vijaykumar.vk3105@gmail.com');
     }
   };
 
