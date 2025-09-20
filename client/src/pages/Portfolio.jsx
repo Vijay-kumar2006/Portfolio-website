@@ -45,9 +45,9 @@ const Portfolio = () => {
 
   const skills = {
     languages: ['C++', 'Python', 'JavaScript', 'TypeScript', 'Java'],
-    frontend: ['React', 'HTML5', 'CSS3', 'Tailwind CSS', 'Bootstrap'],
-    backend: ['Node.js', 'Express.js', 'Flask', 'Django'],
-    databases: ['MongoDB', 'MySQL', 'PostgreSQL'],
+    frontend: ['React', 'HTML', 'CSS', 'Tailwind CSS'],
+    backend: ['Node.js', 'Express.js', 'REST API Development', 'JSON Data Handling', 'Environment Variables (dotenv)'],
+    databases: ['MongoDB', 'MySQL'],
     tools: ['Git', 'GitHub', 'VS Code', 'Linux', 'Figma']
   };
 
@@ -57,21 +57,27 @@ const Portfolio = () => {
       title: 'EcoTrack',
       description: 'A comprehensive environmental impact tracking app that helps users monitor their carbon footprint through daily activities and provides actionable insights for sustainable living.',
       tech: ['React', 'Node.js', 'MongoDB', 'Express.js'],
-      image: 'https://images.unsplash.com/photo-1569163139394-de4e4f43e4e5?w=400&h=250&fit=crop'
+      image: 'https://i.ibb.co/Sw4YRsHm/Ecotrack-tumbnail.png',
+      demo: 'https://ecotrackcapstone.netlify.app/',
+      github: 'https://github.com/kalviumcommunity/S67_VijayKumar_Capstone_EcoTrack.git'
     },
     {
       id: 'lexolution', 
       title: 'Lexolution',
       description: 'An AI-powered language learning platform that adapts to individual learning styles and provides personalized vocabulary building exercises with real-time pronunciation feedback.',
-      tech: ['Python', 'Flask', 'JavaScript', 'MySQL'],
-      image: 'https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=400&h=250&fit=crop'
+      tech: ['React', 'Node.js', 'MongoDB', 'Gemini AI'],
+      image: 'https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=400&h=250&fit=crop',
+      demo: '', // No demo link provided
+      github: 'https://github.com/Vijay-kumar2006/LexoLaw_CodeOfDuty.git'
     },
     {
       id: 'jobgenie',
       title: 'JobGenie', 
       description: 'A smart job matching platform that uses machine learning to connect candidates with relevant opportunities based on skills, experience, and career preferences.',
       tech: ['React', 'Node.js', 'MongoDB', 'Python'],
-      image: 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=400&h=250&fit=crop'
+      image: 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=400&h=250&fit=crop',
+      demo: '', // No demo link provided
+      github: 'https://github.com/kalviumcommunity/Vijay-Jobgenie.git'
     }
   ];
 
@@ -79,17 +85,20 @@ const Portfolio = () => {
     {
       icon: '🏆',
       title: 'Hackathon Finalist',
-      description: 'Reached the finals in multiple hackathons, demonstrating exceptional problem-solving skills and innovative thinking in competitive coding environments.'
+      description: 'Reached the finals in multiple hackathons, demonstrating exceptional problem-solving skills and innovative thinking in competitive coding environments.',
+      certificate: 'https://drive.google.com/file/d/19tMNwnLR4DW3SUi1MJRBedfIwMnRztmq/view?usp=sharing' // replace with actual link
     },
     {
       icon: '💻',
       title: 'CodeVerse GDG RVU Challenge',
-      description: 'Participated in the CodeVerse GDG RVU Challenge, showcasing coding expertise and collaborative problem-solving abilities.'
+      description: 'Participated in the CodeVerse GDG RVU Challenge, showcasing coding expertise and collaborative problem-solving abilities.',
+      certificate: 'https://drive.google.com/file/d/1896HTBghsNnYHjynyGydTBdwUgqkOHFq/view?usp=sharing' // replace with actual link
     },
     {
       icon: '👥',
       title: 'Coding Events Leadership',
       description: 'Led and organized coding events, fostering a collaborative learning environment and mentoring fellow students in programming challenges.'
+      // No certificate
     }
   ];
 
@@ -99,6 +108,8 @@ const Portfolio = () => {
     { icon: '🛡️', title: 'Ethical Hacking', description: 'Learning cybersecurity principles and exploring system vulnerabilities ethically' },
     { icon: '🐧', title: 'Linux Exploration', description: 'Diving deep into Linux systems, command line tools, and open-source technologies' }
   ];
+
+  const WEB3FORMS_ACCESS_KEY = 'b32c7d1d-ebdd-42a0-b282-78e52101e8bb';
 
   const handleResumeDownload = () => {
     const link = document.createElement('a');
@@ -116,7 +127,8 @@ const Portfolio = () => {
       name: formData.get('name'),
       email: formData.get('email'),
       subject: formData.get('subject'),
-      message: formData.get('message')
+      message: formData.get('message'),
+      access_key: WEB3FORMS_ACCESS_KEY
     };
 
     try {
@@ -141,72 +153,58 @@ const Portfolio = () => {
   };
 
   return (
-    <div className="min-h-screen bg-slate-900 text-white">
+    <div>
       {/* Navigation */}
-      <nav className="fixed top-0 w-full bg-slate-900/95 backdrop-blur-sm z-50 border-b border-slate-800">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center py-4">
-            <div className="text-xl font-bold bg-gradient-to-r from-blue-400 to-green-400 bg-clip-text text-transparent">
-              Vijay Kumar R
-            </div>
-            <div className="hidden md:flex space-x-8">
-              {['Hero', 'About', 'Skills', 'Projects', 'Achievements', 'Education', 'Interests', 'Contact'].map((item) => (
+      <nav className="navbar" id="navbar">
+        <div className="nav-container">
+          <div className="nav-logo">
+            Vijay Kumar R
+          </div>
+          <ul className="nav-menu" id="nav-menu">
+            {['Hero', 'About', 'Skills', 'Projects', 'Achievements', 'Education', 'Interests', 'Contact'].map((item) => (
+              <li className="nav-item" key={item}>
                 <button
-                  key={item}
+                  className={`nav-link${activeSection === item.toLowerCase() ? ' active' : ''}`}
                   onClick={() => scrollToSection(item.toLowerCase())}
-                  className={`text-sm font-medium transition-colors hover:text-blue-400 ${
-                    activeSection === item.toLowerCase() ? 'text-blue-400' : 'text-slate-300'
-                  }`}
                 >
                   {item}
                 </button>
-              ))}
-            </div>
-          </div>
+              </li>
+            ))}
+          </ul>
+          {/* ...mobile menu... */}
         </div>
       </nav>
 
       {/* Hero Section */}
-      <section id="hero" className="min-h-screen flex items-center justify-center px-4 pt-16">
-        <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
-          <div className="text-center md:text-left">
-            <h1 className="text-4xl md:text-6xl font-bold mb-6">
-              Hi, I'm <span className="bg-gradient-to-r from-blue-400 to-green-400 bg-clip-text text-transparent">Vijay Kumar R</span>
+      <section id="hero" className="hero">
+        <div className="hero-container">
+          <div className="hero-content">
+            <h1 className="hero-title">
+              Hi, I'm <span className="gradient-text">Vijay Kumar R</span>
             </h1>
-            <p className="text-xl md:text-2xl text-blue-400 mb-4 h-8">
-              {typingText}
-            </p>
-            <p className="text-lg text-slate-300 mb-8 leading-relaxed">
+            <p className="hero-subtitle">{typingText}</p>
+            <p className="hero-description">
               Computer Science student at RV University specializing in C++, Python, and MERN stack development. 
               Passionate about solving complex problems and building innovative solutions that make a difference.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-              <Button 
-                className="bg-gradient-to-r from-blue-500 to-green-500 hover:from-blue-600 hover:to-green-600"
-                onClick={handleResumeDownload}
-              >
-                📄 Download Resume
-              </Button>
-              <Button 
-                variant="outline" 
-                className="border-blue-400 text-blue-400 hover:bg-blue-400 hover:text-slate-900"
-                onClick={() => scrollToSection('contact')}
-              >
-                ✉️ Contact Me
-              </Button>
+            <div className="hero-buttons">
+              <button className="btn btn-primary" onClick={handleResumeDownload}>
+                <i className="fas fa-download"></i> Download Resume
+              </button>
+              <button className="btn btn-secondary" onClick={() => scrollToSection('contact')}>
+                <i className="fas fa-envelope"></i> Contact Me
+              </button>
             </div>
           </div>
-          <div className="flex justify-center">
-            <div className="relative">
-              <div className="w-80 h-80 rounded-full overflow-hidden border-4 border-gradient-to-r from-blue-400 to-green-400 shadow-2xl">
-                <img 
-                  src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face" 
-                  alt="Vijay Kumar R" 
-                  className="w-full h-full object-cover"
-                />
-              </div>
+          <div className="hero-image">
+            <div className="hero-image-wrapper">
+              <img src="https://i.ibb.co/6JpsNMby/Whats-App-Image-2025-09-16-at-8-58-02-PM.jpg" alt="Vijay Kumar R" />
             </div>
           </div>
+        </div>
+        <div className="scroll-indicator">
+          <i className="fas fa-chevron-down"></i>
         </div>
       </section>
 
@@ -307,8 +305,28 @@ const Portfolio = () => {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                     <div className="flex gap-4">
-                      <Button size="sm" className="bg-blue-500 hover:bg-blue-600">🔗 Demo</Button>
-                      <Button size="sm" variant="outline" className="border-white text-white hover:bg-white hover:text-slate-900">⚡ GitHub</Button>
+                      <Button 
+                        size="sm" 
+                        className="bg-blue-500 text-white rounded-full px-4 py-2 flex items-center gap-2 hover:bg-blue-600"
+                        onClick={() => window.open(project.demo || project.github, '_blank')}
+                        disabled={!project.demo && !project.github}
+                      >
+                        <span className="mr-1">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" strokeWidth="2" d="M7 17l10-10M17 7H7v10"/></svg>
+                        </span>
+                        Demo
+                      </Button>
+                      <Button 
+                        size="sm" 
+                        className="bg-blue-500 text-white rounded-full px-4 py-2 flex items-center gap-2 hover:bg-blue-600"
+                        onClick={() => window.open(project.github, '_blank')}
+                        disabled={!project.github}
+                      >
+                        <span className="mr-1">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2C7.03 2 3 6.03 3 11c0 4.42 3.58 8.06 8 8.94V22h2v-2.06c4.42-.88 8-4.52 8-8.94 0-4.97-4.03-9-9-9zm0 16c-3.86 0-7-3.14-7-7 0-3.86 3.14-7 7-7s7 3.14 7 7c0 3.86-3.14 7-7 7zm-1-13h2v6h-2zm0 8h2v2h-2z"/></svg>
+                        </span>
+                        GitHub
+                      </Button>
                     </div>
                   </div>
                 </div>
@@ -345,7 +363,16 @@ const Portfolio = () => {
                 <CardContent className="p-6">
                   <div className="text-4xl mb-4">{achievement.icon}</div>
                   <h3 className="text-lg font-bold text-blue-400 mb-3">{achievement.title}</h3>
-                  <p className="text-slate-300 text-sm leading-relaxed">{achievement.description}</p>
+                  <p className="text-slate-300 text-sm leading-relaxed mb-4">{achievement.description}</p>
+                  {achievement.certificate && (
+                    <Button
+                      size="sm"
+                      className="bg-gradient-to-r from-blue-500 to-green-500 text-white rounded-full px-4 py-2 mt-2 hover:from-blue-600 hover:to-green-600"
+                      onClick={() => window.open(achievement.certificate, '_blank')}
+                    >
+                       View Certificate
+                    </Button>
+                  )}
                 </CardContent>
               </Card>
             ))}
@@ -443,7 +470,7 @@ const Portfolio = () => {
                   variant="outline" 
                   size="sm"
                   className="border-blue-400 text-blue-400 hover:bg-blue-400 hover:text-slate-900"
-                  onClick={() => window.open('https://github.com/vijaykumarr', '_blank')}
+                  onClick={() => window.open('https://github.com/Vijay-kumar2006', '_blank')}
                 >
                   GitHub
                 </Button>
@@ -451,9 +478,17 @@ const Portfolio = () => {
                   variant="outline" 
                   size="sm"
                   className="border-blue-400 text-blue-400 hover:bg-blue-400 hover:text-slate-900"
-                  onClick={() => window.open('https://linkedin.com/in/vijaykumarr', '_blank')}
+                  onClick={() => window.open('https://www.linkedin.com/in/vijay-kumar-r-866213319/', '_blank')}
                 >
                   LinkedIn
+                </Button>
+                 <Button 
+                  variant="outline" 
+                  size="sm"
+                  className="border-blue-400 text-blue-400 hover:bg-blue-400 hover:text-slate-900"
+                  onClick={() => window.open('https://leetcode.com/u/vijay-2006/', '_blank')}
+                >
+                  Leetcode
                 </Button>
               </div>
             </div>
@@ -509,7 +544,7 @@ const Portfolio = () => {
         </div>
       </section>
 
-      {/* Footer */}
+      {/* Footer
       <footer className="py-8 border-t border-slate-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <p className="text-slate-400">
@@ -519,7 +554,7 @@ const Portfolio = () => {
             Made with ❤️ and lots of coffee
           </p>
         </div>
-      </footer>
+      </footer> */}
     </div>
   );
 };

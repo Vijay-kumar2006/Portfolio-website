@@ -3,7 +3,7 @@ import { createServer, type Server } from "http";
 import { storage } from "./storage";
 
 // Function to send email via webhook service
-const sendEmailWebhook = async (name: string, email: string, subject: string, message: string) => {
+const sendEmailWebhook = async (name: string, email: string, subject: string, message: string, access_key?: string) => {
   try {
     // Using a simple webhook service that forwards emails
     const webhookData = {
@@ -27,7 +27,7 @@ const sendEmailWebhook = async (name: string, email: string, subject: string, me
     // Use Web3Forms - completely free email forwarding service
     try {
       const requestBody = {
-        access_key: process.env.WEB3FORMS_ACCESS_KEY,
+        access_key: access_key || process.env.WEB3FORMS_ACCESS_KEY,
         name,
         email,
         subject: `Portfolio Contact: ${subject}`,
@@ -37,7 +37,7 @@ const sendEmailWebhook = async (name: string, email: string, subject: string, me
         _subject: `Portfolio Contact: ${subject}`
       };
 
-      console.log('Sending to Web3Forms with access key length:', process.env.WEB3FORMS_ACCESS_KEY?.length || 0);
+      console.log('Sending to Web3Forms with access key length:', (access_key || process.env.WEB3FORMS_ACCESS_KEY)?.length || 0);
 
       const response = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
@@ -76,7 +76,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Contact form endpoint
   app.post('/api/contact', async (req, res) => {
     try {
-      const { name, email, subject, message } = req.body;
+      const { name, email, subject, message, access_key } = req.body;
 
       if (!name || !email || !subject || !message) {
         return res.status(400).json({ error: 'All fields are required' });
@@ -93,7 +93,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       console.log('============================');
 
       // Try to send email using webhook service
-      const emailSent = await sendEmailWebhook(name, email, subject, message);
+      const emailSent = await sendEmailWebhook(name, email, subject, message, access_key);
       
       if (emailSent) {
         res.status(200).json({ message: 'Message sent successfully! You will receive an email notification.' });

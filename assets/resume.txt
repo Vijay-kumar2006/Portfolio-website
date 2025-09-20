@@ -9,8 +9,8 @@ Computer Science Specialization
 Skills:
 Languages: C++, Python, JavaScript, TypeScript, Java
 Frontend: React, HTML5, CSS3, Tailwind CSS, Bootstrap  
-Backend: Node.js, Express.js, Flask, Django
-Databases: MongoDB, MySQL, PostgreSQL
+Backend: Node.js, Express.js
+Databases: MongoDB, MySQL
 Tools: Git, GitHub, VS Code, Linux, Figma
 
 Projects:
@@ -33,4 +33,5 @@ Contact:
 Email: vijaykumar.r@rvuniversity.edu.in
 Location: Bangalore, India
 GitHub: github.com/vijaykumarr
-LinkedIn: linkedin.com/in/vijaykumarr
+LinkedIn: https://www.linkedin.com/in/vijay-kumar-r-866213319/
+Leetcode : https://leetcode.com/u/vijay-2006/

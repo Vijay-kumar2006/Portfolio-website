@@ -1,0 +1,643 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PawsHome - Pet-Friendly Housing & Community</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#22C55E',
+                        secondary: '#F97316',
+                        accent: '#3B82F6',
+                        neutral: '#1F2937',
+                        success: '#10B981',
+                        warning: '#F59E0B',
+                        error: '#EF4444'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        };
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-50 font-sans">
+    <!-- @COMPONENT: Header [navigation, logo, user menu] -->
+    <header class="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-8">
+                    <div class="flex items-center space-x-2">
+                        <i class="fas fa-paw text-primary text-2xl"></i>
+                        <span class="text-2xl font-bold text-neutral">PawsHome</span>
+                    </div>
+                    <nav class="hidden md:flex space-x-6">
+                        <a href="#" class="text-gray-700 hover:text-primary transition-colors font-medium">Search</a>
+                        <a href="#" class="text-gray-700 hover:text-primary transition-colors font-medium">Community</a>
+                        <a href="#" class="text-gray-700 hover:text-primary transition-colors font-medium">Resources</a>
+                    </nav>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button class="hidden md:block text-gray-700 hover:text-primary transition-colors">
+                        <i class="far fa-heart text-xl"></i>
+                    </button>
+                    <button class="hidden md:block text-gray-700 hover:text-primary transition-colors">
+                        <i class="far fa-bell text-xl"></i>
+                    </button>
+                    <div class="flex items-center space-x-2 bg-gray-100 rounded-full p-1 cursor-pointer hover:bg-gray-200 transition-colors">
+                        <div class="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
+                            <i class="fas fa-user text-white text-sm"></i>
+                        </div>
+                        <span class="hidden md:inline text-sm font-medium text-gray-700 pr-2" data-bind="user.name">Sarah K.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- @END_COMPONENT: Header -->
+
+    <!-- @COMPONENT: HeroSection [search form, featured content] -->
+    <section class="bg-gradient-to-br from-primary/10 to-secondary/10 py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h1 class="text-4xl md:text-6xl font-bold text-neutral mb-4">
+                    Find Your Perfect <span class="text-primary">Pet-Friendly</span> Home
+                </h1>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Discover affordable housing with amazing amenities for you and your furry friends. Connect with a community that understands.
+                </p>
+            </div>
+
+            <!-- Search Form -->
+            <div class="bg-white rounded-2xl shadow-xl p-6 max-w-4xl mx-auto">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+                    <div class="md:col-span-2">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Location</label>
+                        <div class="relative">
+                            <i class="fas fa-map-marker-alt absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                            <input type="text" placeholder="City, neighborhood, or ZIP code" 
+                                   class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Max Rent</label>
+                        <select class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
+                            <option>$1,500</option>
+                            <option>$2,000</option>
+                            <option>$2,500</option>
+                            <option>$3,000+</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Pet Type</label>
+                        <select class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
+                            <option>Dogs</option>
+                            <option>Cats</option>
+                            <option>Both</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <!-- Quick Filters -->
+                <div class="flex flex-wrap gap-3 mb-6">
+                    <button class="px-4 py-2 bg-primary/10 text-primary rounded-full hover:bg-primary hover:text-white transition-colors">
+                        <i class="fas fa-dog mr-2"></i>Dog Park Nearby
+                    </button>
+                    <button class="px-4 py-2 bg-gray-100 text-gray-700 rounded-full hover:bg-primary hover:text-white transition-colors">
+                        <i class="fas fa-stethoscope mr-2"></i>Vet Clinic
+                    </button>
+                    <button class="px-4 py-2 bg-gray-100 text-gray-700 rounded-full hover:bg-primary hover:text-white transition-colors">
+                        <i class="fas fa-store mr-2"></i>Pet Store
+                    </button>
+                    <button class="px-4 py-2 bg-gray-100 text-gray-700 rounded-full hover:bg-primary hover:text-white transition-colors">
+                        <i class="fas fa-cut mr-2"></i>Pet Grooming
+                    </button>
+                </div>
+
+                <button class="w-full bg-primary text-white py-4 rounded-lg font-semibold text-lg hover:bg-primary/90 transition-colors" 
+                        data-event="click:handleSearch">
+                    <i class="fas fa-search mr-2"></i>Search Pet-Friendly Homes
+                </button>
+            </div>
+        </div>
+    </section>
+    <!-- @END_COMPONENT: HeroSection -->
+
+    <!-- @COMPONENT: FeaturedListings [carousel of premium listings] -->
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center mb-12">
+                <div>
+                    <h2 class="text-3xl font-bold text-neutral mb-2">Featured Pet-Friendly Listings</h2>
+                    <p class="text-gray-600">Handpicked homes with exceptional pet amenities</p>
+                </div>
+                <button class="text-primary font-semibold hover:text-primary/80 transition-colors">View All</button>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- @MAP: featuredListings.map(listing => ( -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow cursor-pointer">
+                    <!-- Modern downtown apartment with rooftop dog run and pet washing station -->
+                    <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600" 
+                         alt="Modern pet-friendly apartment" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm font-medium">Featured</span>
+                            <button class="text-gray-400 hover:text-red-500 transition-colors">
+                                <i class="far fa-heart text-xl"></i>
+                            </button>
+                        </div>
+                        <h3 class="text-xl font-semibold text-neutral mb-2" data-bind="listing.title">Skyline Towers</h3>
+                        <p class="text-gray-600 mb-3" data-bind="listing.address">Downtown • 2 bed, 1 bath</p>
+                        <div class="flex items-center space-x-4 mb-4">
+                            <div class="flex items-center text-sm text-gray-600">
+                                <i class="fas fa-dog text-primary mr-1"></i>
+                                <span>Dog Run</span>
+                            </div>
+                            <div class="flex items-center text-sm text-gray-600">
+                                <i class="fas fa-shower text-primary mr-1"></i>
+                                <span>Pet Wash</span>
+                            </div>
+                            <div class="flex items-center text-sm text-gray-600">
+                                <i class="fas fa-tree text-primary mr-1"></i>
+                                <span>Park View</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-2xl font-bold text-neutral" data-bind="listing.price">$1,850<span class="text-sm font-normal">/mo</span></span>
+                            <button class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary/90 transition-colors">
+                                View Details
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow cursor-pointer">
+                    <!-- Cozy suburban home with large fenced backyard perfect for dogs -->
+                    <img src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600" 
+                         alt="Suburban house with yard" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="bg-secondary/10 text-secondary px-3 py-1 rounded-full text-sm font-medium">Pet Paradise</span>
+                            <button class="text-gray-400 hover:text-red-500 transition-colors">
+                                <i class="far fa-heart text-xl"></i>
+                            </button>
+                        </div>
+                        <h3 class="text-xl font-semibold text-neutral mb-2">Maple Street House</h3>
+                        <p class="text-gray-600 mb-3">Suburbia • 3 bed, 2 bath</p>
+                        <div class="flex items-center space-x-4 mb-4">
+                            <div class="flex items-center text-sm text-gray-600">
+                                <i class="fas fa-home text-primary mr-1"></i>
+                                <span>Fenced Yard</span>
+                            </div>
+                            <div class="flex items-center text-sm text-gray-600">
+                                <i class="fas fa-cat text-primary mr-1"></i>
+                                <span>Cat Friendly</span>
+                            </div>
+                            <div class="flex items-center text-sm text-gray-600">
+                                <i class="fas fa-walking text-primary mr-1"></i>
+                                <span>Dog Trails</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-2xl font-bold text-neutral">$2,200<span class="text-sm font-normal">/mo</span></span>
+                            <button class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary/90 transition-colors">
+                                View Details
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow cursor-pointer">
+                    <!-- Luxury high-rise apartment with concierge pet services -->
+                    <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600" 
+                         alt="Luxury apartment building" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="bg-accent/10 text-accent px-3 py-1 rounded-full text-sm font-medium">Luxury</span>
+                            <button class="text-red-500 hover:text-red-600 transition-colors">
+                                <i class="fas fa-heart text-xl"></i>
+                            </button>
+                        </div>
+                        <h3 class="text-xl font-semibold text-neutral mb-2">Harbor View Residences</h3>
+                        <p class="text-gray-600 mb-3">Waterfront • 1 bed, 1 bath</p>
+                        <div class="flex items-center space-x-4 mb-4">
+                            <div class="flex items-center text-sm text-gray-600">
+                                <i class="fas fa-concierge-bell text-primary mr-1"></i>
+                                <span>Pet Concierge</span>
+                            </div>
+                            <div class="flex items-center text-sm text-gray-600">
+                                <i class="fas fa-swimming-pool text-primary mr-1"></i>
+                                <span>Pool Area</span>
+                            </div>
+                            <div class="flex items-center text-sm text-gray-600">
+                                <i class="fas fa-car text-primary mr-1"></i>
+                                <span>Parking</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-2xl font-bold text-neutral">$2,950<span class="text-sm font-normal">/mo</span></span>
+                            <button class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary/90 transition-colors">
+                                View Details
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- @END_MAP )) -->
+            </div>
+        </div>
+    </section>
+    <!-- @END_COMPONENT: FeaturedListings -->
+
+    <!-- @COMPONENT: CommunitySection [community highlights, discussion previews] -->
+    <section class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-neutral mb-4">Connect with Fellow Pet Parents</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Join discussions, share experiences, and get advice from a community that understands life with pets
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <!-- Community Stats -->
+                <div class="space-y-6">
+                    <div class="bg-white rounded-xl p-8 shadow-lg">
+                        <div class="flex items-center space-x-4 mb-6">
+                            <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center">
+                                <i class="fas fa-users text-primary text-xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-semibold text-neutral">Active Community</h3>
+                                <p class="text-gray-600">Real pet parents helping each other</p>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-3 gap-4">
+                            <div class="text-center">
+                                <div class="text-2xl font-bold text-primary" data-bind="stats.members">12.5K</div>
+                                <div class="text-sm text-gray-600">Members</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-2xl font-bold text-secondary" data-bind="stats.discussions">3.2K</div>
+                                <div class="text-sm text-gray-600">Discussions</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-2xl font-bold text-accent" data-bind="stats.reviews">8.9K</div>
+                                <div class="text-sm text-gray-600">Reviews</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-xl p-8 shadow-lg">
+                        <h3 class="text-xl font-semibold text-neutral mb-6">Popular Topics</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors cursor-pointer">
+                                <div class="flex items-center space-x-3">
+                                    <i class="fas fa-map-marked-alt text-primary"></i>
+                                    <span class="font-medium">Neighborhood Reviews</span>
+                                </div>
+                                <span class="text-sm text-gray-500">234 posts</span>
+                            </div>
+                            <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors cursor-pointer">
+                                <div class="flex items-center space-x-3">
+                                    <i class="fas fa-dollar-sign text-secondary"></i>
+                                    <span class="font-medium">Pet Deposit Tips</span>
+                                </div>
+                                <span class="text-sm text-gray-500">189 posts</span>
+                            </div>
+                            <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors cursor-pointer">
+                                <div class="flex items-center space-x-3">
+                                    <i class="fas fa-handshake text-accent"></i>
+                                    <span class="font-medium">Landlord Success Stories</span>
+                                </div>
+                                <span class="text-sm text-gray-500">156 posts</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Discussions -->
+                <div class="space-y-6">
+                    <div class="bg-white rounded-xl p-6 shadow-lg">
+                        <div class="flex items-center justify-between mb-6">
+                            <h3 class="text-xl font-semibold text-neutral">Recent Discussions</h3>
+                            <button class="text-primary font-medium hover:text-primary/80 transition-colors">View All</button>
+                        </div>
+                        
+                        <!-- @MAP: recentDiscussions.map(discussion => ( -->
+                        <div class="space-y-4">
+                            <div class="border-b border-gray-100 pb-4 last:border-b-0 last:pb-0">
+                                <div class="flex items-start space-x-3">
+                                    <div class="w-10 h-10 bg-gradient-to-br from-primary to-secondary rounded-full flex items-center justify-center text-white font-semibold">
+                                        M
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="flex items-center space-x-2 mb-1">
+                                            <span class="font-semibold text-neutral" data-bind="discussion.author">Maya Chen</span>
+                                            <span class="text-sm text-gray-500" data-bind="discussion.time">2 hours ago</span>
+                                        </div>
+                                        <p class="text-gray-700 mb-2" data-bind="discussion.title">Best dog-friendly apartments in Brooklyn? Looking for something under $2500 with outdoor space.</p>
+                                        <div class="flex items-center space-x-4 text-sm text-gray-500">
+                                            <span><i class="far fa-comment mr-1"></i>12 replies</span>
+                                            <span><i class="far fa-heart mr-1"></i>8 likes</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="border-b border-gray-100 pb-4 last:border-b-0 last:pb-0">
+                                <div class="flex items-start space-x-3">
+                                    <div class="w-10 h-10 bg-gradient-to-br from-secondary to-accent rounded-full flex items-center justify-center text-white font-semibold">
+                                        A
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="flex items-center space-x-2 mb-1">
+                                            <span class="font-semibold text-neutral">Alex Rodriguez</span>
+                                            <span class="text-sm text-gray-500">4 hours ago</span>
+                                        </div>
+                                        <p class="text-gray-700 mb-2">Successfully negotiated no pet deposit! Here's how I did it... 🐕</p>
+                                        <div class="flex items-center space-x-4 text-sm text-gray-500">
+                                            <span><i class="far fa-comment mr-1"></i>24 replies</span>
+                                            <span><i class="far fa-heart mr-1"></i>45 likes</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="border-b border-gray-100 pb-4 last:border-b-0 last:pb-0">
+                                <div class="flex items-start space-x-3">
+                                    <div class="w-10 h-10 bg-gradient-to-br from-accent to-primary rounded-full flex items-center justify-center text-white font-semibold">
+                                        K
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="flex items-center space-x-2 mb-1">
+                                            <span class="font-semibold text-neutral">Kim Park</span>
+                                            <span class="text-sm text-gray-500">6 hours ago</span>
+                                        </div>
+                                        <p class="text-gray-700 mb-2">What questions should I ask landlords about pet policies? First time renting with cats.</p>
+                                        <div class="flex items-center space-x-4 text-sm text-gray-500">
+                                            <span><i class="far fa-comment mr-1"></i>18 replies</span>
+                                            <span><i class="far fa-heart mr-1"></i>15 likes</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- @END_MAP )) -->
+                    </div>
+
+                    <button class="w-full bg-primary text-white py-4 rounded-xl font-semibold hover:bg-primary/90 transition-colors">
+                        <i class="fas fa-plus mr-2"></i>Start a Discussion
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- @END_COMPONENT: CommunitySection -->
+
+    <!-- @COMPONENT: MapSection [interactive map with listings] -->
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-neutral mb-4">Explore Pet-Friendly Neighborhoods</h2>
+                <p class="text-xl text-gray-600">Interactive map showing available listings and nearby pet amenities</p>
+            </div>
+
+            <div class="bg-gray-100 rounded-2xl p-4 relative overflow-hidden" style="height: 500px;">
+                <!-- Pet-friendly neighborhood map showing various apartment locations and dog parks -->
+                <img src="https://images.unsplash.com/photo-1524661135-423995f22d0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&h=500" 
+                     alt="Interactive neighborhood map" class="w-full h-full object-cover rounded-xl">
+                
+                <!-- Map Overlay UI -->
+                <div class="absolute inset-4 pointer-events-none">
+                    <!-- Map Controls -->
+                    <div class="absolute top-4 right-4 bg-white rounded-lg shadow-lg p-2 pointer-events-auto">
+                        <button class="block w-8 h-8 bg-gray-100 hover:bg-gray-200 rounded mb-1 flex items-center justify-center">
+                            <i class="fas fa-plus text-gray-600"></i>
+                        </button>
+                        <button class="block w-8 h-8 bg-gray-100 hover:bg-gray-200 rounded flex items-center justify-center">
+                            <i class="fas fa-minus text-gray-600"></i>
+                        </button>
+                    </div>
+
+                    <!-- Filter Toggle -->
+                    <div class="absolute top-4 left-4 bg-white rounded-lg shadow-lg p-3 pointer-events-auto">
+                        <div class="flex items-center space-x-4">
+                            <label class="flex items-center space-x-2">
+                                <input type="checkbox" checked class="rounded text-primary focus:ring-primary">
+                                <span class="text-sm font-medium">Listings</span>
+                            </label>
+                            <label class="flex items-center space-x-2">
+                                <input type="checkbox" checked class="rounded text-secondary focus:ring-secondary">
+                                <span class="text-sm font-medium">Dog Parks</span>
+                            </label>
+                            <label class="flex items-center space-x-2">
+                                <input type="checkbox" class="rounded text-accent focus:ring-accent">
+                                <span class="text-sm font-medium">Vet Clinics</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Sample Map Pins -->
+                    <div class="absolute top-1/4 left-1/3 pointer-events-auto">
+                        <div class="relative">
+                            <button class="w-8 h-8 bg-primary rounded-full shadow-lg flex items-center justify-center text-white font-bold hover:scale-110 transition-transform">
+                                1
+                            </button>
+                            <div class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 bg-white rounded-lg shadow-xl p-3 min-w-48 hidden hover:block">
+                                <div class="text-sm font-semibold">Skyline Towers</div>
+                                <div class="text-xs text-gray-600">$1,850/mo • 2br/1ba</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="absolute top-1/2 left-1/2 pointer-events-auto">
+                        <button class="w-6 h-6 bg-secondary rounded-full shadow-lg flex items-center justify-center text-white">
+                            <i class="fas fa-dog text-xs"></i>
+                        </button>
+                    </div>
+
+                    <div class="absolute top-1/3 right-1/3 pointer-events-auto">
+                        <button class="w-8 h-8 bg-primary rounded-full shadow-lg flex items-center justify-center text-white font-bold hover:scale-110 transition-transform">
+                            3
+                        </button>
+                    </div>
+                </div>
+
+                <!-- @FUNCTIONALITY: This map should implement real interactive mapping using services like Google Maps or Mapbox -->
+            </div>
+
+            <!-- Map Legend -->
+            <div class="mt-6 flex justify-center">
+                <div class="bg-white rounded-lg shadow-lg p-4 flex items-center space-x-6">
+                    <div class="flex items-center space-x-2">
+                        <div class="w-4 h-4 bg-primary rounded-full"></div>
+                        <span class="text-sm text-gray-700">Available Listings</span>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <div class="w-4 h-4 bg-secondary rounded-full"></div>
+                        <span class="text-sm text-gray-700">Dog Parks</span>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <div class="w-4 h-4 bg-accent rounded-full"></div>
+                        <span class="text-sm text-gray-700">Vet Clinics</span>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <div class="w-4 h-4 bg-yellow-500 rounded-full"></div>
+                        <span class="text-sm text-gray-700">Pet Stores</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- @END_COMPONENT: MapSection -->
+
+    <!-- @COMPONENT: CTASection [call to action for signup] -->
+    <section class="py-16 bg-gradient-to-br from-primary to-secondary">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">
+                Ready to Find Your Perfect Pet-Friendly Home?
+            </h2>
+            <p class="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
+                Join thousands of pet parents who've found their ideal homes through our community-driven platform
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <button class="bg-white text-primary px-8 py-4 rounded-xl font-semibold text-lg hover:bg-gray-100 transition-colors">
+                    Create Free Account
+                </button>
+                <button class="border-2 border-white text-white px-8 py-4 rounded-xl font-semibold text-lg hover:bg-white hover:text-primary transition-colors">
+                    Browse Listings
+                </button>
+            </div>
+        </div>
+    </section>
+    <!-- @END_COMPONENT: CTASection -->
+
+    <!-- @COMPONENT: Footer [links, legal, social] -->
+    <footer class="bg-neutral text-white py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="md:col-span-2">
+                    <div class="flex items-center space-x-2 mb-6">
+                        <i class="fas fa-paw text-primary text-2xl"></i>
+                        <span class="text-2xl font-bold">PawsHome</span>
+                    </div>
+                    <p class="text-gray-300 mb-6 max-w-md">
+                        Connecting pet parents with affordable, pet-friendly housing and a supportive community that understands life with furry family members.
+                    </p>
+                    <div class="flex space-x-4">
+                        <button class="w-10 h-10 bg-gray-700 hover:bg-primary rounded-full flex items-center justify-center transition-colors">
+                            <i class="fab fa-facebook-f"></i>
+                        </button>
+                        <button class="w-10 h-10 bg-gray-700 hover:bg-primary rounded-full flex items-center justify-center transition-colors">
+                            <i class="fab fa-twitter"></i>
+                        </button>
+                        <button class="w-10 h-10 bg-gray-700 hover:bg-primary rounded-full flex items-center justify-center transition-colors">
+                            <i class="fab fa-instagram"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="font-semibold mb-4">For Renters</h3>
+                    <ul class="space-y-2 text-gray-300">
+                        <li><a href="#" class="hover:text-primary transition-colors">Search Listings</a></li>
+                        <li><a href="#" class="hover:text-primary transition-colors">Pet Resources</a></li>
+                        <li><a href="#" class="hover:text-primary transition-colors">Renting Tips</a></li>
+                        <li><a href="#" class="hover:text-primary transition-colors">Community Forum</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="font-semibold mb-4">Support</h3>
+                    <ul class="space-y-2 text-gray-300">
+                        <li><a href="#" class="hover:text-primary transition-colors">Help Center</a></li>
+                        <li><a href="#" class="hover:text-primary transition-colors">Contact Us</a></li>
+                        <li><a href="#" class="hover:text-primary transition-colors">Privacy Policy</a></li>
+                        <li><a href="#" class="hover:text-primary transition-colors">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 mt-12 pt-8 text-center text-gray-400">
+                <p>&copy; 2024 PawsHome. All rights reserved. Made with ❤️ for pet parents everywhere.</p>
+            </div>
+        </div>
+    </footer>
+    <!-- @END_COMPONENT: Footer -->
+
+    <!-- @COMPONENT: MobileBottomNav [mobile navigation] -->
+    <nav class="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 z-50">
+        <div class="grid grid-cols-4 h-16">
+            <button class="flex flex-col items-center justify-center space-y-1 text-primary">
+                <i class="fas fa-search text-lg"></i>
+                <span class="text-xs font-medium">Search</span>
+            </button>
+            <button class="flex flex-col items-center justify-center space-y-1 text-gray-400">
+                <i class="fas fa-map text-lg"></i>
+                <span class="text-xs font-medium">Map</span>
+            </button>
+            <button class="flex flex-col items-center justify-center space-y-1 text-gray-400">
+                <i class="fas fa-users text-lg"></i>
+                <span class="text-xs font-medium">Community</span>
+            </button>
+            <button class="flex flex-col items-center justify-center space-y-1 text-gray-400">
+                <i class="fas fa-user text-lg"></i>
+                <span class="text-xs font-medium">Profile</span>
+            </button>
+        </div>
+    </nav>
+    <!-- @END_COMPONENT: MobileBottomNav -->
+
+    <script>
+        (function() {
+            // TODO: Implement business logic, API calls, and state management
+            
+            // Placeholder for search functionality
+            function handleSearch() {
+                console.log('Search functionality to be implemented');
+            }
+            
+            // Placeholder for favorite functionality
+            function toggleFavorite(listingId) {
+                console.log('Favorite toggle functionality to be implemented');
+            }
+            
+            // Placeholder for community interactions
+            function joinDiscussion(discussionId) {
+                console.log('Discussion join functionality to be implemented');
+            }
+            
+            // Basic mobile menu interactions
+            document.querySelectorAll('[data-event]').forEach(element => {
+                const eventConfig = element.getAttribute('data-event');
+                if (eventConfig === 'click:handleSearch') {
+                    element.addEventListener('click', handleSearch);
+                }
+            });
+            
+            // Heart icon toggle for favorites
+            document.querySelectorAll('.fa-heart').forEach(heart => {
+                heart.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    if (this.classList.contains('far')) {
+                        this.classList.remove('far');
+                        this.classList.add('fas');
+                        this.classList.add('text-red-500');
+                    } else {
+                        this.classList.remove('fas', 'text-red-500');
+                        this.classList.add('far');
+                    }
+                });
+            });
+        })();
+    </script>
+</body>
+</html>

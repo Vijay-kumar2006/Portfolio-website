@@ -417,7 +417,7 @@ function showSubmissionSuccess() {
         setTimeout(() => {
             document.body.removeChild(successMessage);
         }, 300);
-    }, 5000);
+    }, 3000);
 }
 
 /**
